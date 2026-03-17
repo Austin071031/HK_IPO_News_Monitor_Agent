@@ -1,0 +1,10 @@
+firecrawl-py
+openai
+pandas
+requests
+beautifulsoup4
+python-dotenv
+pyinstaller
+tabulate
+reportlab
+pywin32
