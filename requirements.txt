@@ -8,3 +8,5 @@ pyinstaller
 tabulate
 reportlab
 pywin32
+markdown-it-py
+playwright

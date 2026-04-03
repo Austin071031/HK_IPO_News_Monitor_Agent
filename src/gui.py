@@ -9,6 +9,15 @@ import pandas as pd
 from .hkex_agent.agent import HKEXAgent
 from .hk_ipo_agent.agent import HKIPOAgent
 
+# Try to import PDF conversion module, but handle if dependencies are missing
+try:
+    from .hk_ipo_agent.convert_md_to_pdf import convert_md_to_pdf
+    PDF_CONVERSION_AVAILABLE = True
+except ImportError as e:
+    print(f"PDF conversion dependencies not available: {e}")
+    PDF_CONVERSION_AVAILABLE = False
+    convert_md_to_pdf = None
+
 class CombinedApp:
     def __init__(self, root):
         self.root = root
@@ -312,6 +321,22 @@ class CombinedApp:
             f.write("\n")
             
         self.log(f"Report saved to: {filepath}")
+        
+        # Convert Markdown to PDF if conversion module is available
+        if PDF_CONVERSION_AVAILABLE and convert_md_to_pdf:
+            try:
+                pdf_filepath = filepath.replace('.md', '.pdf')
+                self.log(f"Converting markdown to PDF: {pdf_filepath}")
+                convert_md_to_pdf(filepath, pdf_filepath)
+                self.log(f"PDF report generated: {pdf_filepath}")
+            except Exception as e:
+                self.log(f"PDF conversion failed: {e}")
+                self.log("Note: Install dependencies with: pip install markdown-it-py playwright")
+                self.log("Then run: playwright install chromium")
+        else:
+            self.log("PDF conversion not available. Install dependencies to enable PDF output.")
+            self.log("Required: pip install markdown-it-py playwright && playwright install chromium")
+        
         try:
             os.startfile(output_dir)
         except:
