@@ -16,27 +16,28 @@ DEFAULT_CONFIG = {
         "https://stcn.com/article/list/gmg.html"
     ],
     "keywords": [
-        "A + H Dual Listing",
-        "证监会",
+        "considering HongKong IPO",
+        "plans HongKong IPO",
+        "seeking HongKong IPO",
+        "HongKong IPO hearing",
         "A1 Filing",
-        "Hong Kong IPO filing",
+        "HongKong IPO filing",
         "Application Proof",
         "Filing with CSRC",
-        "Spin-off in Hong Kong",
-        "IPO hearing",
-        "HK IPO Market Rumors",
-        "二次上市",
-        "先A后H",
-        "中概股回归",
-        "通过聆讯",
+        "Spin-off in HongKong",
+        "HongKong IPO Market Rumors",
+        "港股传闻",
+        "港股IPO传闻",
+        "通过聆讯 港股",
         "拟赴港上市",
-        "拆分上市",
-        "境外上市备案",
-        "港交所 递表",
-        "H股上市"
+        "拟赴港IPO",
+        "拟港股上市",
+        "拟拆分上市 港股",
+        "拟分拆上市 港股",
+        "港交所 递表"
     ],
     "search_period_days": 30,
-    "max_news_items": 10,
+    "max_news_items": 15,
     "recipient_email": ""
 }
 
