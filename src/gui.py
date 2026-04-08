@@ -11,12 +11,21 @@ from .hk_ipo_agent.agent import HKIPOAgent
 
 # Try to import PDF conversion module, but handle if dependencies are missing
 try:
-    from .hk_ipo_agent.convert_md_to_pdf import convert_md_to_pdf
+    # Try enhanced converter first (has fallback to ReportLab)
+    from .hk_ipo_agent.convert_md_to_pdf_enhanced import convert_md_to_pdf, convert_md_to_pdf_safe
     PDF_CONVERSION_AVAILABLE = True
+    print("PDF conversion available (enhanced with fallback)")
 except ImportError as e:
     print(f"PDF conversion dependencies not available: {e}")
-    PDF_CONVERSION_AVAILABLE = False
-    convert_md_to_pdf = None
+    print("Trying ReportLab-only fallback...")
+    try:
+        from .hk_ipo_agent.convert_md_to_pdf_reportlab import convert_md_to_pdf_reportlab as convert_md_to_pdf
+        PDF_CONVERSION_AVAILABLE = True
+        print("PDF conversion available (ReportLab only)")
+    except ImportError:
+        print("No PDF conversion method available")
+        PDF_CONVERSION_AVAILABLE = False
+        convert_md_to_pdf = None
 
 class CombinedApp:
     def __init__(self, root):
