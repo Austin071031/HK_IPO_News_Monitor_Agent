@@ -36,15 +36,14 @@ def convert_md_to_pdf(md_file_path, output_pdf_path):
         a {{
             color: #0366d6;
             text-decoration: none;
-            word-break: break-all;
-            display: inline-block; /* Helps with clickability */
+            word-break: break-word; /* Fix: break-word instead of break-all */
         }}
         a:hover {{
             text-decoration: underline;
         }}
-        /* Make the table cell relative so we can potentially stretch the link */
+        /* Clean table cell styling - remove problematic positioning */
         table td {{
-            position: relative;
+            /* Removed: position: relative; */
         }}
         table {{
             border-spacing: 0;
@@ -98,45 +97,7 @@ def convert_md_to_pdf(md_file_path, output_pdf_path):
     </head>
     <body>
     {html_content}
-    <script>
-    // Wait for content to be fully loaded
-    window.onload = function() {{
-        const tables = document.querySelectorAll("table");
-        tables.forEach(table => {{
-            const rows = table.querySelectorAll("tr");
-            rows.forEach(row => {{
-                const cells = row.querySelectorAll("td");
-                if (cells.length > 0) {{
-                    const lastCell = cells[cells.length - 1];
-                    // Clean up potential markdown formatting remnants
-                    const text = lastCell.textContent.trim();
-                    
-                    // Check if the cell text looks like a URL but isn't wrapped in <a>
-                    if (text.startsWith("http") && !lastCell.querySelector("a")) {{
-                        const url = text;
-                        lastCell.innerHTML = `<a href="${{url}}">${{url}}</a>`;
-                    }}
-                    
-                    const link = lastCell.querySelector("a");
-                    if (link) {{
-                        // Ensure the link is block-level to fill the cell
-                        link.style.display = "block";
-                        link.style.width = "100%";
-                        link.style.minHeight = "100%"; 
-                        link.style.wordBreak = "break-all";
-                        link.style.textDecoration = "none";
-                        link.style.color = "#0366d6";
-                        
-                        // Remove padding from cell and add it to link to maximize clickable area
-                        lastCell.style.padding = "0";
-                        link.style.padding = "2px 4px"; // Match original cell padding
-                        link.style.boxSizing = "border-box";
-                    }}
-                }}
-            }});
-        }});
-    }};
-    </script>
+     <!-- JavaScript removed to fix layout issues -->
     </body>
     </html>
     """
