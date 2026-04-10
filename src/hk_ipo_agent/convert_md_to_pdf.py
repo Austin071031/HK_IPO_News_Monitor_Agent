@@ -164,7 +164,7 @@ def convert_md_to_pdf(md_file_path, output_pdf_path):
                 print("Browsers not installed. Please run 'playwright install'.")
 
 if __name__ == "__main__":
-    md_file = r"D:\05-automation_project\HK_IPO_Info_Analysis_Agent\output\Hong_Kong_IPO_Analysis_2026-03-02.md"
+    md_file = r"/Users/austin/Desktop/HK_IPO_Monitor_Agent/output/Combined_HK_IPO_Report_2026-04-09_173800.md"
     pdf_file = md_file.replace(".md", ".pdf")
     try:
         convert_md_to_pdf(md_file, pdf_file)

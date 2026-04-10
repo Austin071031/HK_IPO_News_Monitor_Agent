@@ -16,9 +16,9 @@ class LLMProcessor:
         - Stock Code (e.g., 2715)
         - Stock Name (Company Name)
         - Listing Date
-        - Status (IPO status)
-        - Origin (Mainland China, HK, or Overseas)
-        - Sector (Industry)
+        - Status (refers to the IPO status, such as "Listed", "Listing", "Pass hearing", "A1 submitted", etc.)
+        - Origin (refers to the base of the company: "Mainland China", "HK", or "Overseas". Infer from context if necessary.)
+        - Sector (refers to the industry that the company belongs to, e.g., "Technology", "Healthcare", "Consumer", etc.)
 
         Return the result as a JSON list of objects. Each object should have keys: "Stock Code", "Stock Name", "Listing Date", "Status", "Origin", "Sector".
         If any field is missing, use "N/A".
@@ -84,7 +84,7 @@ class LLMProcessor:
 
         Extract:
         - IPO Listed Date (Format: 12 Feb 2026, or "N/A" if not found)
-        - IPO Status (e.g., Listed, Delisted, Trading Halted, or "N/A")
+        - IPO Status (refers to the IPO status, such as "Listed", "Listing", "Pass hearing", "A1 submitted", "Delisted", "Trading Halted", etc. Infer from the text if necessary, or use "N/A")
         
         Return the result as a single JSON object with keys: "Listing Date", "Status".
         Only return the JSON object, no markdown formatting.
@@ -122,8 +122,8 @@ class LLMProcessor:
         Please find the entry for this specific company in the text.
 
         Extract:
-        - Origin (Where the company comes from: "Mainland China", "HK", "Overseas", or "N/A")
-        - Sector (Industry the company belongs to, or "N/A")
+        - Origin (refers to the base of the company: "Mainland China", "HK", or "Overseas". If not explicitly stated, try to infer it from the company name, address, or operations context in the text, or use "N/A".)
+        - Sector (refers to the industry that the company belongs to, e.g., "Technology", "Healthcare", "Consumer", etc., or "N/A")
         
         Return the result as a single JSON object with keys: "Origin", "Sector".
         Only return the JSON object, no markdown formatting.

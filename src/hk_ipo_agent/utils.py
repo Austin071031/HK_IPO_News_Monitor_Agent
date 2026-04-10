@@ -1,4 +1,8 @@
-import win32com.client as win32
+try:
+    import win32com.client as win32
+except ImportError:
+    win32 = None
+
 import os
 import datetime
 import re
@@ -97,6 +101,10 @@ def open_email_draft(recipient, attachment_path):
     """
     Opens an Outlook email draft with the attached report.
     """
+    if win32 is None:
+        print("Outlook integration is only supported on Windows.")
+        return False
+        
     try:
         outlook = win32.Dispatch('outlook.application')
         mail = outlook.CreateItem(0)
