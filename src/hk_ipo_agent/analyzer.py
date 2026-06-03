@@ -69,7 +69,7 @@ class IPOAnalyzer:
         
         try:
             response = self.client.chat.completions.create(
-                model="deepseek-reasoner",
+                model="deepseek-v4-pro",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that extracts structured data from financial news."},
                     {"role": "user", "content": prompt}
@@ -130,7 +130,7 @@ class IPOAnalyzer:
         
         try:
             response = self.client.chat.completions.create(
-                model="deepseek-reasoner",
+                model="deepseek-v4-pro",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that extracts contact details."},
                     {"role": "user", "content": prompt}

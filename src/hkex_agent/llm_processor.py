@@ -27,7 +27,7 @@ class LLMProcessor:
         
         try:
             response = self.client.chat.completions.create(
-                model="deepseek-reasoner",
+                model="deepseek-v4-pro",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that extracts structured data from text."},
                     {"role": "user", "content": f"{prompt}\n\nText:\n{markdown_content}"}
@@ -56,7 +56,7 @@ class LLMProcessor:
         
         try:
             response = self.client.chat.completions.create(
-                model="deepseek-reasoner",
+                model="deepseek-v4-pro",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that extracts structured data from text."},
                     {"role": "user", "content": f"{prompt}\n\nText:\n{markdown_content}"}
@@ -92,7 +92,7 @@ class LLMProcessor:
         
         try:
             response = self.client.chat.completions.create(
-                model="deepseek-reasoner",
+                model="deepseek-v4-pro",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that extracts structured data from text."},
                     {"role": "user", "content": f"{prompt}\n\nSearch Results:\n{search_content}"}
@@ -131,7 +131,7 @@ class LLMProcessor:
         
         try:
             response = self.client.chat.completions.create(
-                model="deepseek-reasoner",
+                model="deepseek-v4-pro",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that extracts structured data from text."},
                     {"role": "user", "content": f"{prompt}\n\nSearch Results:\n{search_content}"}
