@@ -311,8 +311,26 @@ class CombinedApp:
                 f.write("No data found.\n")
             f.write("\n")
             
-        self.log(f"Report saved to: {filepath}")
+        self.log(f"Markdown report saved to: {filepath}")
+        
+        # 4. Convert to PDF
+        self.log("--- Converting Report to PDF ---")
+        from .hk_ipo_agent.convert_md_to_pdf import convert_md_to_pdf
+        pdf_filepath = filepath.replace(".md", ".pdf")
         try:
-            os.startfile(output_dir)
-        except:
-            pass
+            convert_md_to_pdf(filepath, pdf_filepath)
+            self.log(f"PDF report saved to: {pdf_filepath}")
+        except Exception as e:
+            self.log(f"Warning: Failed to generate PDF: {e}")
+            if "Executable doesn't exist" in str(e):
+                self.log("Browsers not installed. Please run 'playwright install' in your terminal.")
+
+        try:
+            # On macOS, use open instead of os.startfile
+            import subprocess
+            if os.name == 'nt':
+                os.startfile(output_dir)
+            elif os.name == 'posix':
+                subprocess.call(['open', output_dir])
+        except Exception as e:
+            self.log(f"Could not open output directory automatically: {e}")

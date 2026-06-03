@@ -126,7 +126,19 @@ def main():
         log("--- Generating Combined Report ---")
         filepath = generate_report(hkex_data, hk_ipo_data)
         
-        log(f"Process Completed Successfully! Final report at: {filepath}")
+        log(f"Markdown Report Generated at: {filepath}")
+
+        # 4. Convert to PDF
+        log("--- Converting Report to PDF ---")
+        from src.hk_ipo_agent.convert_md_to_pdf import convert_md_to_pdf
+        pdf_filepath = filepath.replace(".md", ".pdf")
+        try:
+            convert_md_to_pdf(filepath, pdf_filepath)
+            log(f"PDF Report Generated at: {pdf_filepath}")
+        except Exception as e:
+            log(f"Warning: Failed to generate PDF: {e}")
+
+        log(f"Process Completed Successfully! Final reports in output directory.")
 
     except Exception as e:
         log(f"Fatal Error during execution: {e}")
